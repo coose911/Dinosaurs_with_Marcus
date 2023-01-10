@@ -15,20 +15,20 @@ Park.prototype.removeDinosaur = function () {
 }
 
 Park.prototype.mostVisited = function (input) {
-    let mostPopular = {guestsAttractedPerDay:0,name:''};
+    let mostPopular = {guestsAttractedPerDay:0,species:''};
     for (let i = 0; i < input.length; i++) {
             if (input[i].guestsAttractedPerDay > mostPopular.guestsAttractedPerDay){
                 mostPopular = input[i];
+            
             }
     }
-    return mostPopular.name
-    
+    return mostPopular.species
 }
 
-Park.prototype.particularSpecies = function (input) {
-    for(let species = 0; species < this.dinosaurCollection.length; species++) {
-        if (species.species == input){
-            return species
+Park.prototype.particularSpecies = function (param) {
+    for(let i = 0; i < this.dinosaurCollection.length; i++) {
+        if (i.species === param.species){
+            return i.species  
         }
     }
 }
@@ -37,7 +37,6 @@ Park.prototype.totalVisitors = function () {
     totalGuests = 0
     for (let i = 0; i < this.dinosaurCollection.length; i++){
         totalGuests += this.dinosaurCollection[i].guestsAttractedPerDay;
-        
     }
     return totalGuests
 }
