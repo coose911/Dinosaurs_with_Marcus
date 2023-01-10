@@ -5,8 +5,13 @@ const Dinosaur = require('../models/dinosaur.js');
 describe('Park', function() {
 
   let park
+  let dinosaur
+  let dinosaur1
+
   beforeEach(function () {
-    park = new Park ('M&D', 30)
+    park = new Park ('M&D', 30),
+    dinosaur = new Dinosaur('t-rex', 'carnivore', 50)
+    dinosaur1 = new Dinosaur('velociraptor', 'carnivore', 100)
   })
 
   it('should have a name', function(){
@@ -25,31 +30,52 @@ describe('Park', function() {
   });
 
   it('should be able to add a dinosaur to its collection', function() {
-    const dinosaur = new Dinosaur ('t-rex', 'carnivore', 50)
     const actual = park.addDinosaur(dinosaur);
-    console.log(park.dinosaurCollection)
     assert.deepStrictEqual(park.dinosaurCollection, [dinosaur]);
   });
 
 
   it('should be able to remove a dinosaur from its collection', function(){
-    const dinosaur = new Dinosaur ('t-rex', 'carnivore', 50)
-    park.addDinosaur(dinosaur)
     const expected = []
-    park.removeDinosaur();
-
+    park.removeDinosaur(dinosaur);
     const actual = park.dinosaurCollection
     assert.deepStrictEqual(actual, expected);
   });
 
-  it('should be able to find the dinosaur that attracts the most visitors');
+  xit('should be able to find the dinosaur that attracts the most visitors', function() {
+    park.addDinosaur(dinosaur)
+    park.addDinosaur(dinosaur1)
+    const expected = park.mostVisited(park.dinosaurCollection)
+    assert.strictEqual(expected, 'velociraptor')
+    console.log(park.dinosaurCollection)
+  });
 
-  it('should be able to find all dinosaurs of a particular species');
+  xit('should be able to find all dinosaurs of a particular species', function(){
+    park.addDinosaur(dinosaur)
+    park.addDinosaur(dinosaur1)
+    const expected = park.particularSpecies(dinosaur.species)
+    assert.strictEqual(expected, 't-rex')
+  });
 
-  it('should be able to calculate the total number of visitors per day');
+  it('should be able to calculate the total number of visitors per day', function(){
+    park.addDinosaur(dinosaur)
+    park.addDinosaur(dinosaur1)
+    const expected = park.totalVisitors()
+    assert.strictEqual(expected, 150)
+  });
 
-  it('should be able to calculate the total number of visitors per year');
+  it('should be able to calculate the total number of visitors per year', function(){
+    park.addDinosaur(dinosaur)
+    park.addDinosaur(dinosaur1)
+    const expected = park.totalVisitorsPerYear()
+    assert.strictEqual(expected, 54750)
+});
 
-  it('should be able to calculate total revenue for one year');
+  it('should be able to calculate total revenue for one year', function(){
+    park.addDinosaur(dinosaur)
+    park.addDinosaur(dinosaur1)
+    const expected = park.totalRevenuePerYear()
+    assert.strictEqual(expected, 1642500)
+});
 
 });
