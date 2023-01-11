@@ -19,7 +19,6 @@ Park.prototype.mostVisited = function (input) {
     for (let i = 0; i < input.length; i++) {
             if (input[i].guestsAttractedPerDay > mostPopular.guestsAttractedPerDay){
                 mostPopular = input[i];
-            
             }
     }
     return mostPopular.species
@@ -27,8 +26,8 @@ Park.prototype.mostVisited = function (input) {
 
 Park.prototype.particularSpecies = function (param) {
     for(let i = 0; i < this.dinosaurCollection.length; i++) {
-        if (i.species === param.species){
-            return i.species  
+        if (this.dinosaurCollection[i].species === param.species){
+            return param.species  
         }
     }
 }
